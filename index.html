@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>La Saringa — Cotizador de nieves</title>
+  <meta name="description" content="Cotizador de nieves La Saringa. Comparte por link o QR." />
+  <style>
+    /* Minimal reset and layout adapted from the React styles */
+    body{font-family:Trebuchet MS, Arial, sans-serif; margin:0; background:linear-gradient(180deg,#B8F2D5 0%,#CFF6E4 40%,#F8C9E6 120%); color:#0f0f0f}
+    .page{max-width:1100px;margin:18px auto;padding:12px}
+    header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:120px;height:auto;border-radius:14px;background:rgba(255,255,255,0.55);padding:8px}
+    .brandName{font-size:34px;font-style:italic;font-weight:900}
+    .contactBox{min-width:220px;max-width:360px;border-radius:12px;padding:12px;background:rgba(255,255,255,0.62)}
+    .hero{display:grid;grid-template-columns:1.15fr 0.85fr;gap:18px;margin-top:14px}
+    .card{background:rgba(255,255,255,0.66);padding:14px;border-radius:16px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .flavors{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{padding:8px 10px;border-radius:12px;border:1px solid rgba(0,0,0,0.12);cursor:pointer;background:rgba(255,255,255,0.55)}
+    .chip.active{background:rgba(255,79,163,0.24);border:2px solid rgba(0,0,0,0.18)}
+    .qr{width:140px;height:140px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);display:block}
+    footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px}
+    .cta{display:flex;gap:8px;margin-top:12px}
+    .btn{padding:10px 12px;border-radius:10px;text-decoration:none;color:#000;font-weight:800}
+    .btn.primary{background:#1aa884;border:2px solid rgba(0,0,0,0.12)}
+    .btn.secondary{background:#ff4fa3;border:2px solid rgba(0,0,0,0.12)}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <img src="/assets/logo.png" alt="La Saringa" class="logo" />
+        <div>
+          <div class="brandName">La Saringa</div>
+          <div style="font-weight:700">Nieves 100% naturales, artesanales</div>
+        </div>
+      </div>
+      <div class="contactBox">
+        <div style="font-weight:900">📍 Hidalgo, México</div>
+        <div style="margin-top:8px;font-size:18px;font-weight:900">📞 7711918713</div>
+        <div style="margin-top:8px"><a id="whatsappLink" class="btn secondary" href="#">💬 Cotizar por WhatsApp</a></div>
+        <div style="margin-top:8px;font-size:12px">*Para pagos y acuerdos, siempre contáctanos al número de arriba.</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h2>Nieves personalizadas para tus eventos 🎉</h2>
+        <p>Encargos con <b>1 semana</b> de anticipación. Servicio con <b>2 horas</b>, vasos y cucharas para pruebas (material incluido). Entrega en <b>Hidalgo</b> únicamente.</p>
+        <p>Límite por encargo: <b>mínimo 10 L</b> y <b>máximo 150 L</b>.</p>
+
+        <div style="margin-top:12px;display:flex;gap:18px;align-items:center">
+          <div>
+            <div style="font-weight:900">Compartir</div>
+            <img id="qr" class="qr" src="" alt="QR" />
+            <div style="margin-top:8px;font-size:13px">Escanea o comparte el enlace para que cualquiera entre</div>
+          </div>
+          <div style="flex:1">
+            <img src="/assets/mesa.jpg" alt="Mesa" style="width:100%;border-radius:12px;object-fit:cover;max-height:320px" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🧮 Cotizador</h3>
+        <div style="margin-top:8px">
+          <label>Personas: <input id="people" type="range" min="40" max="600" step="1" value="20" style="width:100%" /></label>
+          <div style="margin-top:8px">Estimadas: <span id="peopleVal">20</span> personas</div>
+
+          <div style="margin-top:12px">Sabores (cada uno suma 5 L)</div>
+          <div id="flavors" class="flavors"></div>
+
+          <div style="margin-top:12px;font-weight:900">Litros estimados: <span id="liters">10</span> L</div>
+          <div style="margin-top:8px;font-weight:900">Total estimado: $<span id="total">0</span> MXN</div>
+
+          <div class="cta">
+            <a class="btn primary" id="callLink" href="tel:7711918713">📞 Llamar</a>
+            <a class="btn secondary" id="whatsBtn" href="#">💬 Enviar por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="background:rgba(255,255,255,0.55);padding:12px;border-radius:12px;min-width:260px">
+        <div style="font-weight:900">Saringa 🍧🦋</div>
+        <div style="margin-top:6px">Nieves 100% naturales. Entregas y eventos en Hidalgo.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.55);padding:12px;border-radius:12px;min-width:260px">
+        <div style="font-weight:900">Contacto</div>
+        <div style="margin-top:6px">📞 7711918713</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Basic interactive logic (approximation of provided React component)
+    const MIN_LITROS = 10, MAX_LITROS = 150;
+    const peopleEl = document.getElementById('people');
+    const peopleVal = document.getElementById('peopleVal');
+    const litersEl = document.getElementById('liters');
+    const totalEl = document.getElementById('total');
+    const flavorsEl = document.getElementById('flavors');
+
+    const flavorsList = ["Queso","Guayaba","Mango-fresa","Mango","Limón","Mango-chile","Choco-platano","Plátano con chispas de chocolate","Crema de limón","Beso de angel","Cajeta","Rompope","Coco","Vainilla","Fresas con crema","Nogada","Naranja-limon","Bailey's","Mazapán","Aguacate","Mamey","Guanabana","Tamarindo","Ron con pasas","Melón","Cereza","Mantecado","Pistache","Pepino-Limon","Manzana-pepino-limon","Tequila-limon","Mojito"];
+
+    let selected = [];
+
+    function precioPorLitro(l){
+      if (l>=20 && l<=25) return 150;
+      if (l>25) return 130;
+      return 150;
+    }
+
+    function renderFlavors(){
+      flavorsEl.innerHTML='';
+      flavorsList.forEach(s=>{
+        const btn = document.createElement('button');
+        btn.className='chip'+(selected.includes(s)?' active':'');
+        btn.textContent=s;
+        btn.onclick = ()=>{
+          if(selected.includes(s)){ selected = selected.filter(x=>x!==s); }
+          else{ if((selected.length+1)*5 <= MAX_LITROS) selected.push(s); }
+          updateAll();
+        };
+        flavorsEl.appendChild(btn);
+      })
+    }
+
+    function litersFromPeople(p){ return p*0.25; }
+
+    function updateAll(){
+      const p = parseInt(peopleEl.value,10);
+      peopleVal.textContent = p;
+      let liters = litersFromPeople(p);
+      if(selected.length>0){ liters = selected.length*5; }
+      liters = Math.max(MIN_LITROS, Math.min(MAX_LITROS, Math.round(liters*4)/4));
+      litersEl.textContent = liters.toFixed(2);
+      const precio = precioPorLitro(liters);
+      totalEl.textContent = Math.round(liters * precio);
+
+      // update whatsapp link
+      const phone = '5217711918713';
+      const text = encodeURIComponent(`Hola Saringa Quiero cotizar nieve. Personas: ${p}. Litros: ${liters}. Sabores: ${selected.join(', ') || 'Ninguno'}`);
+      document.getElementById('whatsBtn').href = `https://wa.me/${phone}?text=${text}`;
+      document.getElementById('whatsappLink').href = `https://wa.me/${phone}?text=${text}`;
+
+      renderFlavors();
+    }
+
+    peopleEl.addEventListener('input', updateAll);
+
+    // QR: point to the GitHub Pages URL for this repo
+    const siteUrl = 'https://sebastianpedron2007-glitch.github.io/LaSaringa/';
+    const qrImg = document.getElementById('qr');
+    qrImg.src = `https://chart.googleapis.com/chart?cht=qr&chs=240x240&chl=${encodeURIComponent(siteUrl)}`;
+
+    // Setup initial state
+    renderFlavors();
+    updateAll();
+  </script>
+</body>
+</html>
